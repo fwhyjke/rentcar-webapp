@@ -1,3 +1,7 @@
 from django.shortcuts import render
+from django.views.generic import TemplateView
 
-# Create your views here.
+
+# welcome page view
+class WelcomePage(TemplateView):
+    template_name = 'welcome.html'

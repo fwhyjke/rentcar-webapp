@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rentcar_app.apps.RentcarAppConfig'
 ]
 
 MIDDLEWARE = [
@@ -75,8 +76,12 @@ WSGI_APPLICATION = 'rentcar.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'rent_db',
+        'USER': 'postgres',
+        'PASSWORD': 'Ilyaaa123',
+        'HOST': 'localhost',
+        'PORT': '5432'
     }
 }
 
