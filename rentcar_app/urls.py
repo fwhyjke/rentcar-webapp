@@ -1,6 +1,7 @@
 from django.urls import path
-from rentcar_app.views import WelcomePage
+from rentcar_app.views import WelcomeView, RegistrationView
 
 urlpatterns = [
-    path('welcome', WelcomePage.as_view()),
+    path('welcome', WelcomeView.as_view(), name='welcome'),
+    path('registration', RegistrationView.as_view(), name='registration')
 ]
