@@ -1,9 +1,11 @@
 from django.contrib.auth.base_user import AbstractBaseUser
+from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 from .managers import UserManager
 
 
-class User(AbstractBaseUser):
+# PermissionsMixin need to correct work of is_superuser
+class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
