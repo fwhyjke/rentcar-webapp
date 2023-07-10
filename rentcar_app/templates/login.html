@@ -10,5 +10,7 @@
     {{ form.as_p }}
     <button type="submit">Log In</button>
 </form>
+<a href="{% url "social:begin" "vk-oauth2" %}">VKontakte</a>
+<a href="{% url "social:begin" "github" %}">GitHub</a>
 </body>
 </html>

@@ -103,6 +103,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.vk.VKOAuth2',
+    'social_core.backends.github.GithubOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 )
 
@@ -128,8 +129,16 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # OAuth with psql
-SOCIAL_AUTH_JSONFIELD_ENABLED = True
+SOCIAL_AUTH_POSTGRES_JSONFIELD_ENABLED = True
+
+LOGIN_REDIRECT_URL = 'welcome'
 
 # VK OAuth
 SOCIAL_AUTH_VK_OAUTH2_KEY = '51699349'
 SOCIAL_AUTH_VK_OAUTH2_SECRET = 'XftOOgOHRPqKFVYTobaF'
+SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email']
+
+# GitHub OAuth
+SOCIAL_AUTH_GITHUB_KEY = '13e6b864a1878aec8b09'
+SOCIAL_AUTH_GITHUB_SECRET = '83fd5172f62a041a37c435a00ca399a3a615bf2c'
+SOCIAL_AUTH_GITHUB_SCOPE = ['user']
