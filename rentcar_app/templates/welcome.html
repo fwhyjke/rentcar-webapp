@@ -2,9 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>{{ title }}</title>
 </head>
 <body>
 <p1>Hi!</p1>
+{{ username }}
+<a href="{% url "login" %}">Войти</a>
+<a href="{% url "registration" %}">Зарегистрироваться</a>
 </body>
 </html>
