@@ -12,7 +12,6 @@ class WelcomeView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Аренда авто'
-        context['username'] = self.request.user
         return context
 
 
