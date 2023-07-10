@@ -15,9 +15,9 @@ class User(AbstractBaseUser):
     objects = UserManager()
 
     # the name of the field on the User model that is used as the unique identifier
-    USERNAME_FIELD = email
+    USERNAME_FIELD = 'email'
     # list of the field names that will be prompted for when creating a user with the createsuperuser
-    REQUIRED_FIELDS = ['email', 'first_name']
+    REQUIRED_FIELDS = ['first_name']
 
     def get_full_name(self):
         full_name = f'{self.first_name} {self.last_name}'
