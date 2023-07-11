@@ -1,5 +1,5 @@
 from django.urls import path
-from rentcar_app.views import *
+from rentgame_app.views import *
 
 urlpatterns = [
     path('welcome', WelcomeView.as_view(), name='welcome'),
