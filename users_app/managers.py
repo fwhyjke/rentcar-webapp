@@ -17,7 +17,7 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         # creating token for verification email address
         from users_app.models import VerifyEmailToken
-        VerifyEmailToken.objects.create(email=user, token=generate_confirmation_code())
+        VerifyEmailToken.objects.create(user=user, token=generate_confirmation_code())
         return user
 
     def create_user(self, email, password=None, **extra_fields):
