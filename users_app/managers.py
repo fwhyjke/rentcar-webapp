@@ -1,4 +1,5 @@
 from django.contrib.auth.base_user import BaseUserManager
+from .utils import generate_confirmation_code
 
 
 class UserManager(BaseUserManager):
@@ -14,6 +15,9 @@ class UserManager(BaseUserManager):
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
+        # creating token for verification email address
+        from users_app.models import VerifyEmailToken
+        VerifyEmailToken.objects.create(email=user, token=generate_confirmation_code())
         return user
 
     def create_user(self, email, password=None, **extra_fields):

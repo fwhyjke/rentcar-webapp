@@ -1,7 +1,7 @@
 from django.contrib.auth.base_user import AbstractBaseUser
-from django.contrib.auth.models import PermissionsMixin
+from django.contrib.auth.models import PermissionsMixin, Group, Permission
 from django.db import models
-from .managers import UserManager
+from users_app.managers import UserManager
 
 
 # PermissionsMixin need to correct work of is_superuser
@@ -13,6 +13,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_verified = models.BooleanField(default=False)
+    groups = models.ManyToManyField(Group, related_name='user_set_user', blank=True)
+    user_permissions = models.ManyToManyField(Permission, related_name='user_set_user', blank=True)
 
     objects = UserManager()
 
@@ -31,3 +33,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     class Meta:
         verbose_name = 'user'
         verbose_name_plural = 'users'
+
+
+class VerifyEmailToken(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    token = models.CharField()
