@@ -1,3 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import redirect
+from rest_framework.views import APIView
+from users_app.models import VerifyEmailToken
 
-# Create your views here.
+
+class VerifyEmail(APIView):
+    def get(self, request, **kwargs):
+        token = self.kwargs['token']
+        user = VerifyEmailToken.objects.get(token=token).user
+        user.is_verified = True
+        user.save()
+        return redirect('welcome')

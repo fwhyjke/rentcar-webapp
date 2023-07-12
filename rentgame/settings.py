@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'social_django',
+    'rest_framework',
 
     'rentgame_app.apps.RentgameAppConfig',
     'users_app.apps.UsersAppConfig',
