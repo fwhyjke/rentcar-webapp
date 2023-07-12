@@ -6,7 +6,7 @@ from rentgame_app.forms import RegistrationForm, LoginForm
 
 # welcome page view
 class WelcomeView(TemplateView):
-    template_name = 'welcome.html'
+    template_name = 'rentgame_app/welcome.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -16,13 +16,13 @@ class WelcomeView(TemplateView):
 
 # registration page view
 class RegistrationView(CreateView):
-    template_name = 'registration.html'
+    template_name = 'rentgame_app/registration.html'
     form_class = RegistrationForm
     success_url = reverse_lazy('welcome')
 
 
 class LoginUserView(LoginView):
-    template_name = 'login.html'
+    template_name = 'rentgame_app/login.html'
     form_class = LoginForm
     success_url = reverse_lazy('welcome')
 
