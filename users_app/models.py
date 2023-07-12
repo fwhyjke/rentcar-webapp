@@ -16,8 +16,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     groups = models.ManyToManyField(Group, related_name='user_set_user', blank=True)
     user_permissions = models.ManyToManyField(Permission, related_name='user_set_user', blank=True)
 
-    objects = UserManager()
-
     # the name of the field on the User model that is used as the unique identifier
     USERNAME_FIELD = 'email'
     # list of the field names that will be prompted for when creating a user with the createsuperuser
@@ -33,6 +31,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     class Meta:
         verbose_name = 'user'
         verbose_name_plural = 'users'
+
+    objects = UserManager()
 
 
 class VerifyEmailToken(models.Model):
