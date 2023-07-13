@@ -1,14 +1,15 @@
 from django.contrib.auth import login
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, CreateView
+from django.views.generic import TemplateView, CreateView, ListView
 from rentgame_app.forms import RegistrationForm, LoginForm
 
 
 # welcome page view
-class WelcomeView(TemplateView):
-    template_name = 'rentgame_app/welcome.html'
+class MainPageView(TemplateView):
+    template_name = 'rentgame_app/main.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -20,21 +21,20 @@ class WelcomeView(TemplateView):
 class RegistrationView(CreateView):
     template_name = 'rentgame_app/registration.html'
     form_class = RegistrationForm
-    success_url = reverse_lazy('welcome')
+    success_url = reverse_lazy('main')
 
     def form_valid(self, form):
         user = form.save()
         # Since we have no only one backend, we need to specify which one to use here
         user.backend = 'django.contrib.auth.backends.ModelBackend'
         login(self.request, user)
-        return redirect('welcome')
+        return redirect('main')
 
 
 class LoginUserView(LoginView):
     template_name = 'rentgame_app/login.html'
     form_class = LoginForm
-    success_url = reverse_lazy('welcome')
 
 
 class LogoutUserView(LogoutView):
-    next_page = reverse_lazy('welcome')
+    next_page = reverse_lazy('main')

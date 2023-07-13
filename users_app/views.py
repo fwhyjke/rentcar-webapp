@@ -10,4 +10,4 @@ class VerifyEmail(APIView):
         user = VerifyEmailToken.objects.get(token=token).user
         user.is_verified = True
         user.save()
-        return redirect('welcome')
+        return redirect('main')

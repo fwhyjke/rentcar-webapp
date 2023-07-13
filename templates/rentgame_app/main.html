@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+</head>
+<body>
+<p1>Hi!</p1>
+{% if user.is_authenticated %}
+    {% if not user.is_verified %}
+        <p1>Please check your mail. You have received an email to verify your account.</p1>
+    {% endif %}
+    <p>Пользователь: {{ user.first_name }} {{ user.last_name }}</p>
+    <a href="{% url 'logout' %}">Выйти</a>
+{% else %}
+    <a href="{% url 'login' %}">Войти</a>
+    <a href="{% url 'registration' %}">Зарегистрироваться</a>
+{% endif %}
+</body>
+</html>
