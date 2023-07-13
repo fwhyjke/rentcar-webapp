@@ -1,4 +1,6 @@
+from django.contrib.auth import login
 from django.contrib.auth.views import LoginView, LogoutView
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, CreateView
 from rentgame_app.forms import RegistrationForm, LoginForm
@@ -19,6 +21,12 @@ class RegistrationView(CreateView):
     template_name = 'rentgame_app/registration.html'
     form_class = RegistrationForm
     success_url = reverse_lazy('welcome')
+
+    def form_valid(self, form):
+        user = form.save()
+        user.backend = 'django.contrib.auth.backends.ModelBackend'
+        login(self.request, user)
+        return redirect('welcome')
 
 
 class LoginUserView(LoginView):
