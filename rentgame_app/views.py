@@ -3,12 +3,13 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, CreateView, ListView
-from rentgame_app.forms import RegistrationForm, LoginForm
+from rentgame_app.forms import RegistrationForm, LoginForm, AddGameForm
 
 
 # welcome page view
-class MainPageView(TemplateView):
+class MainPageView(CreateView):
     template_name = 'rentgame_app/main.html'
+    form_class = AddGameForm
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

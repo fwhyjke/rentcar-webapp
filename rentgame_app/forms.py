@@ -1,3 +1,5 @@
+from django.forms import ModelForm
+from rentgame_app.models import Game
 from users_app.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
@@ -17,3 +19,9 @@ class RegistrationForm(UserCreationForm):
 
 class LoginForm(AuthenticationForm):
     None
+
+
+class AddGameForm(ModelForm):
+    class Meta:
+        model = Game
+        fields = '__all__'
