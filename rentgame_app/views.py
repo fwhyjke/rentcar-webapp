@@ -24,6 +24,7 @@ class RegistrationView(CreateView):
 
     def form_valid(self, form):
         user = form.save()
+        # Since we have no only one backend, we need to specify which one to use here
         user.backend = 'django.contrib.auth.backends.ModelBackend'
         login(self.request, user)
         return redirect('welcome')
