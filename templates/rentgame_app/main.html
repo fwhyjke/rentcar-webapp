@@ -3,8 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ title }}</title>
-    {% load autocomplete_light %}
-    {% autocomplete_light_jquery_autocomplete "widget.html" %}
 </head>
 <body>
 <p1>Hi!</p1>
@@ -14,7 +12,7 @@
     {% endif %}
     <p>Пользователь: {{ user.first_name }} {{ user.last_name }}</p>
     <a href="{% url 'logout' %}">Выйти</a>
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Опубликовать</button>

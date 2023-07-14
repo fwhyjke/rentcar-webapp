@@ -10,11 +10,16 @@ from rentgame_app.forms import RegistrationForm, LoginForm, AddGameForm
 class MainPageView(CreateView):
     template_name = 'rentgame_app/main.html'
     form_class = AddGameForm
+    success_url = reverse_lazy('main')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Аренда авто'
         return context
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 
 # registration page view
