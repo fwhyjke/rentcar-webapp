@@ -22,6 +22,21 @@ class MainPageView(CreateView):
         return super().form_valid(form)
 
 
+class AddGameView(CreateView):
+    template_name = 'rentgame_app/addgame.html'
+    form_class = AddGameForm
+    success_url = reverse_lazy('main')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Создание объявления'
+        return context
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+
 # registration page view
 class RegistrationView(CreateView):
     template_name = 'rentgame_app/registration.html'

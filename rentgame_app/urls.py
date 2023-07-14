@@ -3,6 +3,7 @@ from rentgame_app.views import *
 
 urlpatterns = [
     path('', MainPageView.as_view(), name='main'),
+    path('addgame', AddGameView.as_view(), name='addgame'),
     path('registration', RegistrationView.as_view(), name='registration'),
     path('login', LoginUserView.as_view(), name='login'),
     path('logout', LogoutUserView.as_view(), name='logout'),

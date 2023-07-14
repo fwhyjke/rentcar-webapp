@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+</head>
+<body>
+<p1>Создайте ваще объявление по аренде игры!</p1>
+{% if not user.is_verified %}
+<p1>Please check your mail. You have received an email to verify your account.</p1>
+{% else %}
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Опубликовать</button>
+</form>
+{% endif %}
+</body>
+</html>
