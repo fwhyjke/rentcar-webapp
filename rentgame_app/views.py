@@ -2,24 +2,24 @@ from django.contrib.auth import login
 from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, CreateView, ListView
+from django.views.generic import CreateView, ListView
 from rentgame_app.forms import RegistrationForm, LoginForm, AddGameForm
+from rentgame_app.models import Game
 
 
 # welcome page view
-class MainPageView(CreateView):
+class MainPageView(ListView):
+    model = Game
     template_name = 'rentgame_app/main.html'
-    form_class = AddGameForm
-    success_url = reverse_lazy('main')
+    context_object_name = 'games'
+
+    def get_queryset(self):
+        return Game.objects.all()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Аренда авто'
+        context['title'] = 'RentGame: аренда игр'
         return context
-
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super().form_valid(form)
 
 
 class AddGameView(CreateView):

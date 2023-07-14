@@ -1,0 +1,27 @@
+.advertisements {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.advertisement {
+  width: 250px;
+  margin: 10px;
+  padding: 10px;
+  background-color: #f5f5f5;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.advertisement h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.advertisement img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.advertisement p {
+  margin-bottom: 5px;
+}

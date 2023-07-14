@@ -1,8 +1,10 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>{{ title }}</title>
+    <link type="text/css" href="{% static 'rentgame_app/style.css' %}" rel="stylesheet">
 </head>
 <body>
 <p1>Hi!</p1>
@@ -16,5 +18,19 @@
     <a href="{% url 'login' %}">Войти</a>
     <a href="{% url 'registration' %}">Зарегистрироваться</a>
 {% endif %}
+
+{% for game in games %}
+  <div class="advertisements">
+    <div class="advertisement">
+      <h3>{{ game.title }}</h3>
+        {% if game.image %}
+          <img src="media/{{ game.image }}" alt="{{ game.title }}">
+        {% endif %}
+      <p>Цена: {{ game.price }}</p>
+      <p>Залог: {{ game.pledge }}</p>
+      <p>Автор: {{ game.user.first_name }}</p>
+    </div>
+  </div>
+{% endfor %}
 </body>
 </html>
