@@ -4,10 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ title }}</title>
-    <link type="text/css" href="{% static 'rentgame_app/style.css' %}" rel="stylesheet">
+    <link type="text/css" href="{% static 'rentgame_app/css/style.css' %}" rel="stylesheet">
 </head>
 <body>
 <p1>Hi!</p1>
+<a href="{% url 'addgame' %}">Добавить объявление</a>
 {% if user.is_authenticated %}
     {% if not user.is_verified %}
         <p1>Please check your mail. You have received an email to verify your account.</p1>
