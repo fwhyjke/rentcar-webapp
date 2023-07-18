@@ -1,7 +1,7 @@
 from django.contrib.auth import login
 from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import redirect, render
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views import View
 from django.views.generic import CreateView, ListView, DetailView
 from rentgame_app.forms import RegistrationForm, LoginForm, GameForm
@@ -27,7 +27,6 @@ class MainPageView(ListView):
 class AddGameView(CreateView):
     template_name = 'rentgame_app/addgame.html'
     form_class = GameForm
-    success_url = reverse_lazy('main')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -37,6 +36,9 @@ class AddGameView(CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('show', kwargs={'game_slug': self.object.slug})
 
 
 #
