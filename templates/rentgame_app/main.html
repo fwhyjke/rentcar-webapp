@@ -21,9 +21,9 @@
 {% endif %}
 
 {% for game in games %}
-  <div class="advertisements">
+  <div class="advertisements" >
     <div class="advertisement">
-      <h3>{{ game.title }}</h3>
+      <a href="{% url 'show' game.slug %}">{{ game.title }}</a>
         {% if game.image %}
           <img src="media/{{ game.image }}" alt="{{ game.title }}">
         {% endif %}

@@ -1,10 +1,12 @@
 from django.contrib.auth import login
 from django.contrib.auth.views import LoginView, LogoutView
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView
-from rentgame_app.forms import RegistrationForm, LoginForm, AddGameForm
+from django.views import View
+from django.views.generic import CreateView, ListView, DetailView
+from rentgame_app.forms import RegistrationForm, LoginForm, GameForm
 from rentgame_app.models import Game
+from rentgame_app.services import get_game_by_slug, get_game_field_value_dict, update_game_post_or_return_error
 
 
 # welcome page view
@@ -24,7 +26,7 @@ class MainPageView(ListView):
 
 class AddGameView(CreateView):
     template_name = 'rentgame_app/addgame.html'
-    form_class = AddGameForm
+    form_class = GameForm
     success_url = reverse_lazy('main')
 
     def get_context_data(self, **kwargs):
@@ -36,6 +38,40 @@ class AddGameView(CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
+
+#
+class ChangeGameView(View):
+    def get(self, request, *args, **kwargs):
+        template = 'rentgame_app/change_game.html'
+
+        slug = kwargs['game_slug']
+        game = get_game_by_slug(slug=slug)
+        initial = get_game_field_value_dict(game)
+        form = GameForm(initial=initial)
+        context = {'game_title': initial['title'], 'form': form, 'slug': slug}
+
+        return render(request, template_name=template, context=context)
+
+    def post(self, request, *args, **kwargs):
+        print(request.POST)
+        game = get_game_by_slug(slug=kwargs['game_slug'])
+        form = GameForm(request.POST, request.FILES)
+
+        return update_game_post_or_return_error(request, game, form)
+
+
+class ShowGameView(View):
+    def get(self, request, *args, **kwargs):
+        template = 'rentgame_app/show_game.html'
+        game = get_game_by_slug(slug=kwargs['game_slug'])
+        context = get_game_field_value_dict(game)
+        context['page_title'] = context['title'] + ': просмотр объявления'
+        context['active_user'] = self.request.user
+
+        return render(request, template_name=template, context=context)
+
+
+#
 
 # registration page view
 class RegistrationView(CreateView):

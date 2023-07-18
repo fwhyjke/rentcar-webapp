@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ page_title }}</title>
+</head>
+<body>
+<div>
+    <a href="{% url 'main' %}">На главную</a>
+</div>
+<div>
+    {{ title }}
+</div>
+<div>
+    {{ price }}
+</div>
+<div>
+    {{ pledge }}
+</div>
+{% if image %}
+<div>
+    <img src="{{ image.url }}" alt="{{ title }}">
+</div>
+{% endif %}
+<div>
+    {{ platform }}
+</div>
+<div>
+    {{ category }}
+</div>
+<div>
+    {{ description }}
+</div>
+
+{% if active_user == user %}
+<a href="{% url 'change' slug %}">Изменить объявление</a>
+{% endif %}
+</body>
+</html>

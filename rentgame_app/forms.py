@@ -22,7 +22,7 @@ class LoginForm(AuthenticationForm):
     None
 
 
-class AddGameForm(ModelForm):
+class GameForm(ModelForm):
     category = ModelChoiceField(queryset=GamesCategory.objects.all(), empty_label='Выберите категорию игры', widget=Select)
     platform = ModelChoiceField(queryset=GamesPlatform.objects.all(), empty_label='Выберите игровую платформу', widget=Select)
     city = ModelChoiceField(queryset=City.objects.all(), empty_label='Выберите город', widget=Select)
